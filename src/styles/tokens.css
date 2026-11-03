@@ -1,0 +1,90 @@
+/*
+ * Tokens de diseño — tuCliente (familia Seven Cats).
+ *
+ * Cada app de Seven Cats tiene su color insignia:
+ *   tuTinta → verde lima · CRM personal → amarillo girasol · tuCliente → CORAL
+ *
+ * Tipografía de la familia: Fredoka (títulos) + Space Grotesk (texto).
+ * Para alinear al 100% con TuTinta / CRM, ajustar solo este archivo.
+ */
+:root {
+  /* Tipografía */
+  --font-display: 'Fredoka', ui-rounded, system-ui, sans-serif;
+  --font-body: 'Space Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* Coral — color insignia */
+  --coral-50: #fff3f0;
+  --coral-100: #ffe1da;
+  --coral-200: #ffc2b4;
+  --coral-300: #ff9f8a;
+  --coral-400: #ff7f66;
+  --coral-500: #ff6b4f;
+  --coral-600: #e9502f;
+  --coral-700: #c03d21;
+  --coral-800: #8f2e1a;
+
+  --brand: var(--coral-500);
+  --brand-strong: var(--coral-600);
+  --brand-ink: #3a130a; /* texto sobre coral claro */
+  --on-brand: #ffffff;
+  --brand-soft: var(--coral-50);
+  --brand-soft-2: var(--coral-100);
+
+  /* Neutros (cálidos) */
+  --bg: #fbf8f6;
+  --surface: #ffffff;
+  --surface-2: #f5f0ec;
+  --border: #ebe3dd;
+  --border-strong: #d8ccc3;
+  --text: #22191a;
+  --text-2: #5f5452;
+  --text-3: #8f8381;
+
+  /* Semánticos */
+  --ok: #1f9d6b;
+  --ok-soft: #e3f6ee;
+  --warn: #c98a00;
+  --warn-soft: #fff4d6;
+  --danger: #d23a3a;
+  --danger-soft: #fde8e8;
+  --info: #3b6fd8;
+  --info-soft: #e7eefc;
+
+  /* Forma */
+  --radius-sm: 8px;
+  --radius: 14px;
+  --radius-lg: 22px;
+  --radius-pill: 999px;
+  --shadow-sm: 0 1px 2px rgb(60 30 20 / 0.06);
+  --shadow: 0 2px 4px rgb(60 30 20 / 0.04), 0 8px 24px rgb(60 30 20 / 0.06);
+  --shadow-lg: 0 12px 40px rgb(60 30 20 / 0.14);
+
+  --sidebar-w: 248px;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --brand: var(--coral-400);
+    --brand-strong: var(--coral-300);
+    --brand-ink: #ffe1da;
+    --on-brand: #2a0d06;
+    --brand-soft: #3a1d17;
+    --brand-soft-2: #4b241b;
+
+    --bg: #161112;
+    --surface: #1f191a;
+    --surface-2: #282122;
+    --border: #352c2d;
+    --border-strong: #4a3f40;
+    --text: #f6efed;
+    --text-2: #c4b7b4;
+    --text-3: #8f8381;
+
+    --ok-soft: #12352a;
+    --warn-soft: #3a2f10;
+    --danger-soft: #3d1a1a;
+    --info-soft: #182a4a;
+    color-scheme: dark;
+  }
+}
