@@ -395,7 +395,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
   display: flex;
   flex-direction: column;
   gap: 16px;
-  box-shadow: 0 10px 30px rgb(233 80 47 / 0.25);
+  box-shadow: 0 10px 30px rgb(var(--brand-rgb) / 0.3);
 }
 .stamp-card::after {
   content: '';

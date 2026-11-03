@@ -13,19 +13,20 @@
   --font-body: 'Space Grotesk', system-ui, -apple-system, 'Segoe UI', sans-serif;
 
   /* Coral — color insignia */
-  --coral-50: #fff3f0;
-  --coral-100: #ffe1da;
-  --coral-200: #ffc2b4;
-  --coral-300: #ff9f8a;
-  --coral-400: #ff7f66;
-  --coral-500: #ff6b4f;
-  --coral-600: #e9502f;
-  --coral-700: #c03d21;
-  --coral-800: #8f2e1a;
+  --coral-50: #fef2f4;
+  --coral-100: #fee2e6;
+  --coral-200: #fcc5cd;
+  --coral-300: #fba2ae;
+  --coral-400: #f97f8f;
+  --coral-500: #f85f73; /* color insignia */
+  --coral-600: #db5365;
+  --coral-700: #ba4655;
+  --coral-800: #903440;
 
   --brand: var(--coral-500);
   --brand-strong: var(--coral-600);
-  --brand-ink: #3a130a; /* texto sobre coral claro */
+  --brand-rgb: 248 95 115;
+  --brand-ink: #3a0f16; /* texto sobre coral claro */
   --on-brand: #ffffff;
   --brand-soft: var(--coral-50);
   --brand-soft-2: var(--coral-100);
@@ -65,12 +66,12 @@
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) {
-    --brand: var(--coral-400);
-    --brand-strong: var(--coral-300);
-    --brand-ink: #ffe1da;
-    --on-brand: #2a0d06;
-    --brand-soft: #3a1d17;
-    --brand-soft-2: #4b241b;
+    --brand: var(--coral-500);
+    --brand-strong: var(--coral-400);
+    --brand-ink: #fee2e6;
+    --on-brand: #2a0a10;
+    --brand-soft: #3a1a20;
+    --brand-soft-2: #4b222a;
 
     --bg: #161112;
     --surface: #1f191a;
