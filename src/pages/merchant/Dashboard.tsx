@@ -79,7 +79,7 @@ export function Dashboard() {
       <div className="grid grid-4">
         <Kpi icon="users" label="Clientes adheridos" value={customers.length} hint={`${activeCustomers} compraron este mes`} />
         <Kpi icon="trend" label="Ventas registradas" value={money(revenue)} hint={`${last30.length} compras`} />
-        <Kpi icon="paw" label="Sellos entregados" value={stampsIssued} hint="por compras" />
+        <Kpi icon="seal" label="Sellos entregados" value={stampsIssued} hint="por compras" />
         <Kpi icon="gift" label="Canjes" value={redemptions30} hint={`${issued.length} pendientes de usar`} />
       </div>
 

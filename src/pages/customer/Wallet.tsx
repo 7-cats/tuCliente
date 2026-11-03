@@ -13,7 +13,7 @@ import {
 import { exchangeStamps, redeemReward, renderMessage } from '../../domain/services';
 import type { Redemption } from '../../domain/types';
 import { dateLong, dateShort, plural } from '../../lib/format';
-import { Icon, Paw } from '../../components/Icon';
+import { Icon, Seal } from '../../components/Icon';
 import { Empty, Modal } from '../../components/ui';
 import { StampCard } from '../../components/StampCard';
 
@@ -43,7 +43,7 @@ export function Wallet() {
           <h1>{customer.name.split(' ')[0]} 👋</h1>
         </div>
         <div className="card row" style={{ padding: '12px 18px' }}>
-          <Paw size={22} style={{ color: 'var(--brand)' }} />
+          <Seal size={40} style={{ color: 'var(--brand)' }} />
           <div>
             <div style={{ fontFamily: 'var(--font-display)', fontSize: 24, fontWeight: 600, lineHeight: 1 }}>{total}</div>
             <div className="subtle">sellos en {plural(cards.length, 'comercio')}</div>

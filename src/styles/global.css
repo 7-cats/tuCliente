@@ -418,8 +418,8 @@ button, input, select, textarea { font: inherit; color: inherit; }
   display: grid;
   place-items: center;
 }
-.stamp.on { background: #fff; border: 2px solid #fff; color: var(--coral-600); }
-.stamp.on svg { width: 55%; height: 55%; }
+.stamp.on { background: #fff; border: 2px solid #fff; color: var(--coral-700); }
+.stamp.on svg { width: 98%; height: 98%; }
 .stamp-card .sc-foot { font-size: 13px; opacity: 0.95; position: relative; z-index: 1; }
 .stamp-card.compact { padding: 16px; gap: 12px; }
 .stamp-card.compact .stamp-grid { gap: 6px; }

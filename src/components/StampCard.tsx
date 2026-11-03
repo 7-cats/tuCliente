@@ -1,6 +1,6 @@
 import { CATEGORY_LABEL, plural } from '../lib/format';
 import type { Business, Reward } from '../domain/types';
-import { Paw } from './Icon';
+import { Seal } from './Icon';
 
 /**
  * Tarjeta visual de sellos. Muestra los sellos del "ciclo" actual
@@ -34,7 +34,7 @@ export function StampCard({
       <div className="stamp-grid" aria-label={`${filled} de ${size} sellos`}>
         {Array.from({ length: size }, (_, i) => (
           <div key={i} className={`stamp ${i < filled ? 'on' : ''}`}>
-            {i < filled && <Paw />}
+            {i < filled && <Seal size={64} rotate={(i * 37) % 30 - 15} />}
           </div>
         ))}
       </div>

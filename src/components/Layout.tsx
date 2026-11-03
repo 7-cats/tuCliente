@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import { useBusiness, useStore } from '../data/store';
 import { CATEGORY_LABEL } from '../lib/format';
-import { Icon, Paw, type IconName } from './Icon';
+import { Icon, Seal, type IconName } from './Icon';
 import { Field, Toasts } from './ui';
 
 const MERCHANT_NAV: { to: string; label: string; icon: IconName; end?: boolean }[] = [
@@ -141,7 +141,7 @@ function Brand() {
   return (
     <NavLink to="/" className="brand">
       <span className="brand-mark">
-        <Paw size={20} />
+        <Seal size={30} detail={false} />
       </span>
       <span>
         <div className="brand-name">

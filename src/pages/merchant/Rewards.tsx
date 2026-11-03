@@ -5,7 +5,7 @@ import { byId, isRewardAvailable } from '../../domain/queries';
 import { cancelRedemption, deleteReward, markRedemptionUsed, upsertReward } from '../../domain/services';
 import type { Reward, RewardKind } from '../../domain/types';
 import { dateLong, money, toDateInput } from '../../lib/format';
-import { Icon, Paw } from '../../components/Icon';
+import { Icon, Seal } from '../../components/Icon';
 import { Empty, Field, Modal, NumberInput, PageHead } from '../../components/ui';
 import { RedemptionBadge } from './CustomerDetail';
 
@@ -59,7 +59,7 @@ export function Rewards() {
               <h3>{r.name}</h3>
               {r.description && <p className="subtle">{r.description}</p>}
               <div className="reward-cost">
-                <Paw size={18} /> {r.cost} sellos
+                <Seal size={22} detail={false} /> {r.cost} sellos
               </div>
               <div className="subtle">
                 {[

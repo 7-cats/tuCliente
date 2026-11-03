@@ -186,7 +186,7 @@ export function CustomerDetail() {
                   </table>
                 </div>
               ) : (
-                <Empty title="Sin movimientos" icon="paw" />
+                <Empty title="Sin movimientos" icon="seal" />
               ))}
 
             {tab === 'canjes' &&

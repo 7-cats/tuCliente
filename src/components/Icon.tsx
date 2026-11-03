@@ -1,4 +1,4 @@
-import type { SVGProps } from 'react';
+import { useId, type SVGProps } from 'react';
 
 /** Íconos de línea (estilo lucide), inline para no depender de librerías. */
 const PATHS: Record<string, string> = {
@@ -33,10 +33,10 @@ const PATHS: Record<string, string> = {
   sparkle: 'M12 3l1.9 5.6L19.5 10l-5.6 1.9L12 17.5l-1.9-5.6L4.5 10l5.6-1.4zM19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z',
 };
 
-export type IconName = keyof typeof PATHS | 'paw';
+export type IconName = keyof typeof PATHS | 'seal';
 
 export function Icon({ name, size = 18, ...rest }: { name: IconName; size?: number } & SVGProps<SVGSVGElement>) {
-  if (name === 'paw') return <Paw size={size} {...rest} />;
+  if (name === 'seal') return <Seal size={size} {...(rest as Omit<SVGProps<SVGSVGElement>, 'rotate'>)} />;
   return (
     <svg
       width={size}
@@ -55,15 +55,71 @@ export function Icon({ name, size = 18, ...rest }: { name: IconName; size?: numb
   );
 }
 
-/** Huellita — el "sello" de tuCliente (guiño a Seven Cats). */
-export function Paw({ size = 18, ...rest }: { size?: number } & SVGProps<SVGSVGElement>) {
+/**
+ * Sello de goma de tuCliente: doble anillo con texto circular y una banda
+ * central que dice "SEVEN CATS". Usa currentColor, así que funciona sobre
+ * cualquier fondo.
+ *
+ * - `detail`: muestra texto circular, texto de la banda y textura de tinta.
+ *   Por defecto se activa desde 28px; en tamaños chicos queda solo la forma.
+ */
+export function Seal({
+  size = 18,
+  detail,
+  rotate = -12,
+  ink = true,
+  ...rest
+}: { size?: number; detail?: boolean; rotate?: number; ink?: boolean } & Omit<SVGProps<SVGSVGElement>, 'rotate'>) {
+  const id = useId().replace(/[^a-zA-Z0-9]/g, '');
+  const full = detail ?? size >= 28;
   return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" {...rest}>
-      <ellipse cx="6" cy="10" rx="2.2" ry="2.8" />
-      <ellipse cx="10" cy="5.8" rx="2.2" ry="2.9" />
-      <ellipse cx="14.5" cy="5.8" rx="2.2" ry="2.9" />
-      <ellipse cx="18.3" cy="10" rx="2.2" ry="2.8" />
-      <path d="M12.2 11.5c-3 0-6.2 3.6-6.2 6.2 0 1.8 1.4 2.8 3 2.8 1.3 0 2.1-.7 3.2-.7s1.9.7 3.2.7c1.6 0 3-1 3-2.8 0-2.6-3.2-6.2-6.2-6.2z" />
+    <svg width={size} height={size} viewBox="0 0 100 100" aria-hidden="true" {...rest}>
+      <defs>
+        <path id={`${id}t`} d="M 14 50 A 36 36 0 0 1 86 50" />
+        <path id={`${id}b`} d="M 6 50 A 44 44 0 0 0 94 50" />
+        {/* Los anillos se cortan donde pasa la banda, como en un sello real. */}
+        <mask id={`${id}m`}>
+          <rect width="100" height="100" fill="#fff" />
+          <rect x="2" y="37" width="96" height="26" fill="#000" />
+        </mask>
+        {full && ink && (
+          <filter id={`${id}i`} x="0" y="0" width="100%" height="100%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="2" seed="7" result="n" />
+            <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  5 0 0 0 -0.9" result="a" />
+            <feComposite in="SourceGraphic" in2="a" operator="in" />
+          </filter>
+        )}
+      </defs>
+      <g
+        transform={`rotate(${rotate} 50 50)`}
+        filter={full && ink ? `url(#${id}i)` : undefined}
+        fill="none"
+        stroke="currentColor"
+      >
+        <g mask={`url(#${id}m)`}>
+          <circle cx="50" cy="50" r="46" strokeWidth={full ? 5 : 7} />
+          <circle cx="50" cy="50" r={full ? 31 : 30} strokeWidth={full ? 2.6 : 5} />
+        </g>
+        <rect x="4" y="38.5" width="92" height="23" rx="1.5" strokeWidth={full ? 4 : 6} />
+        {full && <rect x="8.5" y="42.5" width="83" height="15" strokeWidth="1.6" />}
+        {full && (
+          <g fill="currentColor" stroke="none" fontFamily="'Courier Prime', 'Courier New', monospace" fontWeight="700">
+            <text fontSize="11" letterSpacing="1" textAnchor="middle">
+              <textPath href={`#${id}t`} startOffset="50%">
+                TU CLIENTE
+              </textPath>
+            </text>
+            <text fontSize="8.5" letterSpacing="1.2" textAnchor="middle">
+              <textPath href={`#${id}b`} startOffset="50%">
+                ★ FIDELIDAD ★
+              </textPath>
+            </text>
+            <text x="50" y="54.2" fontSize="13.5" textAnchor="middle" textLength="74" lengthAdjust="spacingAndGlyphs">
+              SEVEN CATS
+            </text>
+          </g>
+        )}
+      </g>
     </svg>
   );
 }
