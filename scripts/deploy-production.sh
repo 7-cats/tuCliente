@@ -44,10 +44,11 @@ python3 - "$PROBE" "$BASE" <<'PY'
 import pathlib, re, subprocess, sys
 html = pathlib.Path('dist/index.html').read_text()
 public = pathlib.Path(sys.argv[1]).read_text()
-assets = re.findall(r'(?:src|href)="(/assets/[^\"]+)"', html)
+assets = re.findall(r'(?:src|href)="((?:\./|/)assets/[^\"]+)"', html)
 assert assets, 'No generated assets'
 for asset in assets:
     assert asset in public, f'Missing deployed asset: {asset}'
+    asset = '/' + asset.removeprefix('./').lstrip('/')
     body = subprocess.check_output(['curl', '--connect-timeout', '10', '--max-time', '25', '--retry-max-time', '60', '--fail', '--silent', '--show-error', '--retry', '2', sys.argv[2] + asset])
     assert body == pathlib.Path('dist' + asset).read_bytes(), f'Asset mismatch: {asset}'
 print('Public HTML references and asset bytes verified')
