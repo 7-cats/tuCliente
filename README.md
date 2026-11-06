@@ -71,6 +71,17 @@ src/
   pages/       merchant/* y customer/*
 ```
 
+## Deploy automático
+
+La demo está publicada en https://tucliente.sevencats.com.ar.
+Cada push a `main` ejecuta `.github/workflows/deploy-production.yml`: instala dependencias con Node 22, corre los tests, compila y publica `dist/`. También se puede ejecutar manualmente desde **Actions → Deploy production → Run workflow** sobre `main`.
+
+El runner dedicado `tucliente-production` corre como servicio de sistema en la Raspberry Pi. No ejecuta pull requests. No requiere abrir SSH a Internet ni guardar credenciales de despliegue en el repositorio. Solo personas de confianza deben tener permiso para modificar `main` o sus workflows: el runner tiene acceso al servidor de producción.
+
+`scripts/deploy-production.sh` serializa publicaciones, conserva la versión anterior fuera del directorio público y la restaura si falla la verificación. Comprueba el origen, HTTPS, la revisión publicada y los archivos JS/CSS. Los backups están en `/home/tomas/dockers/tucliente/backups/`; se conservan hasta una limpieza manual revisada. Un fallo de tests o build deja el sitio anterior intacto. No se reinician los proxies compartidos.
+
+Este despliegue sigue siendo una demo con datos locales al navegador; no agrega backend, cuentas ni sincronización entre dispositivos.
+
 ## Próximos pasos sugeridos
 
 1. **Backend**: Supabase (Postgres + Auth + RLS). Los servicios de `domain/` pasan casi tal cual a funciones RPC o edge functions. El libro mayor queda como tabla de solo inserción.
